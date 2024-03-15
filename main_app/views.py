@@ -14,7 +14,6 @@ class Home(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         allFoods = Food.objects.filter(user_id=self.request.user)
-        #identify only those foods which were posted on the same day, local time
         foodsToday = filter(lambda x: x.timestamp.astimezone().day == datetime.date.today().day and x.timestamp.astimezone().month == datetime.date.today().month and x.timestamp.astimezone().year == datetime.date.today().year, allFoods)
         total = 0
         for food in foodsToday:
@@ -61,12 +60,9 @@ class FoodDelete(LoginRequiredMixin, DeleteView):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        # create user object
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            # add user to the database
             user = form.save()
-            # logging user in via code
             login(request, user)
             return redirect('caloriecounter/')
         else:
