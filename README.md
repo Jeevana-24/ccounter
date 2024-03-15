@@ -29,3 +29,4 @@ Calorie Tracker is a web application that helps you monitor your daily calorie i
 - Enhanced weight and desired weight goal settings.
 
 ## Screenshots
+[screenshot_5358954_losifjs]
